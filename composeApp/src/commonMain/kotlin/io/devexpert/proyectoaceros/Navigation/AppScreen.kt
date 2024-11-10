@@ -1,0 +1,12 @@
+package io.devexpert.proyectoaceros.Navigation
+
+/*
+Es una clase que se encarga de definir una ruta para para cierta pantalla,
+no necesariamente esta ligada a la pantalla creada, es solo una direccion
+para tener mas centralizado el uso de pantallas
+* */
+
+sealed class AppScreen (val router: String) {
+    object fistScreen : AppScreen("fistScreen_app")
+    object seconScreen : AppScreen("seconScreen_app")
+}
