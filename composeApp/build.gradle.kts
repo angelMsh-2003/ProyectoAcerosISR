@@ -55,6 +55,7 @@ kotlin {
             implementation(libs.androidx.lifecycle.runtime.compose)
             implementation(libs.sqldelight.coroutines)
             implementation(compose.material3)
+
         }
     }
 }
@@ -93,6 +94,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-savedstate:2.8.7")
     implementation("androidx.compose.material3:material3:1.3.1")
     implementation(libs.androidx.ui.text.google.fonts)
-    implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.text)
+
+
 }

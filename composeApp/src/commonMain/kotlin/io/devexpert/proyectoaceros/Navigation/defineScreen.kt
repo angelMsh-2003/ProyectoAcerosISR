@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import io.devexpert.proyectoaceros.View.FirstMainScreen
+import io.devexpert.proyectoaceros.View.MainMenuInicio
 import io.devexpert.proyectoaceros.View.SeconMainScreen
 
 /*
@@ -14,8 +15,10 @@ composable que tendra la view de dicha pantalla
 
 @Composable
 fun defineMainScreen (navController:Navigation) {
-    val currentScreen by navController.currentScreen.collectAsState(initial = AppScreen.fistScreen)
+    val currentScreen by navController.currentScreen.collectAsState(initial = AppScreen.MenuInicio)
     when (currentScreen) {
+        is AppScreen.MenuInicio -> MainMenuInicio (navController)
+        // PANTALLAS DE PRUEBA
         is AppScreen.fistScreen -> FirstMainScreen (navController)
         is AppScreen.seconScreen -> SeconMainScreen (navController)
         else -> {

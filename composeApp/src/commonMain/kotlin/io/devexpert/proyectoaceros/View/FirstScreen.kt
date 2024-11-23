@@ -89,7 +89,7 @@ fun FirstScreen (navController: Navigation) {
         }
         Row (modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
             OutlinedButton(
-                onClick = {navController.navigateTo(AppScreen.seconScreen)}
+                onClick = {navController.navigateTo(AppScreen.MenuInicio)}
             ) {
                 Text("Tipografia", color = Theme.textColorBlack)
             }

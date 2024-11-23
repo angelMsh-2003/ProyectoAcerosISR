@@ -9,4 +9,5 @@ para tener mas centralizado el uso de pantallas
 sealed class AppScreen (val router: String) {
     object fistScreen : AppScreen("fistScreen_app")
     object seconScreen : AppScreen("seconScreen_app")
+    object MenuInicio : AppScreen ("manuInicio_app")
 }
