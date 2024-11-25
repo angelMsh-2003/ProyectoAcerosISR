@@ -11,7 +11,7 @@ actualizando el estado actual por el estado siguiente
 * */
 
 class Navigation {
-    private val _currentScreen = MutableStateFlow<AppScreen>(AppScreen.fistScreen)
+    private val _currentScreen = MutableStateFlow<AppScreen>(AppScreen.MenuInicio)
     val currentScreen: StateFlow<AppScreen> = _currentScreen.asStateFlow()
 
     fun navigateTo(screen: AppScreen) {

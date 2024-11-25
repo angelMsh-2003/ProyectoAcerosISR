@@ -10,6 +10,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import io.devexpert.proyectoaceros.Navigation.AppScreen
 import io.devexpert.proyectoaceros.Navigation.Navigation
 import io.devexpert.proyectoaceros.Navigation.defineMainScreen
+import io.devexpert.proyectoaceros.View.AsignacionTareas
 import io.devexpert.proyectoaceros.View.FirstMainScreen
 import io.devexpert.proyectoaceros.View.MenuInicio
 import io.devexpert.proyectoaceros.View.SeconMainScreen
@@ -42,5 +43,4 @@ class MainActivity : ComponentActivity() {
 @Preview (showSystemUi = true)
 @Composable
 fun AppAndroidPreview() {
-    //MenuInicio()
 }

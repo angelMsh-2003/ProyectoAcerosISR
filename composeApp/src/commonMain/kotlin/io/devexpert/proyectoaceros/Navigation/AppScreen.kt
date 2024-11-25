@@ -10,4 +10,5 @@ sealed class AppScreen (val router: String) {
     object fistScreen : AppScreen("fistScreen_app")
     object seconScreen : AppScreen("seconScreen_app")
     object MenuInicio : AppScreen ("manuInicio_app")
+    object AsignarTareas : AppScreen ("asignarTa_app")
 }

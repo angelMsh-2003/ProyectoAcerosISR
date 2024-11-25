@@ -55,7 +55,6 @@ kotlin {
             implementation(libs.androidx.lifecycle.runtime.compose)
             implementation(libs.sqldelight.coroutines)
             implementation(compose.material3)
-
         }
     }
 }

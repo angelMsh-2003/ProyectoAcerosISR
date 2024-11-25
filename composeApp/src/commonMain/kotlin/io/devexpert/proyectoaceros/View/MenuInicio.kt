@@ -49,7 +49,7 @@ fun MenuInicio (navController: Navigation) {
         verticalArrangement = Arrangement.Top
     ) {
         // HEADER
-        Header()
+        Encabezado()
         // CONTENT
         Row (modifier = Modifier
             .fillMaxWidth()
@@ -78,7 +78,7 @@ fun MenuInicio (navController: Navigation) {
                 Spacer(modifier = Modifier.width(8.dp))
                 IconButton(
                     onClick = {
-                        navController.navigateTo(AppScreen.fistScreen)
+                        navController.navigateTo(AppScreen.AsignarTareas)
                     },
                     modifier = Modifier
                         .size(150.dp)

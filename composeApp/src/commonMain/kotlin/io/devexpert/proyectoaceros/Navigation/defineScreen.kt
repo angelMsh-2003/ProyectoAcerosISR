@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import io.devexpert.proyectoaceros.View.FirstMainScreen
+import io.devexpert.proyectoaceros.View.MainAsignacionTareas
 import io.devexpert.proyectoaceros.View.MainMenuInicio
 import io.devexpert.proyectoaceros.View.SeconMainScreen
 
@@ -18,6 +19,7 @@ fun defineMainScreen (navController:Navigation) {
     val currentScreen by navController.currentScreen.collectAsState(initial = AppScreen.MenuInicio)
     when (currentScreen) {
         is AppScreen.MenuInicio -> MainMenuInicio (navController)
+        is AppScreen.AsignarTareas -> MainAsignacionTareas(navController)
         // PANTALLAS DE PRUEBA
         is AppScreen.fistScreen -> FirstMainScreen (navController)
         is AppScreen.seconScreen -> SeconMainScreen (navController)
