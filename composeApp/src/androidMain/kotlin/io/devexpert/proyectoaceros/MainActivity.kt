@@ -12,7 +12,11 @@ import io.devexpert.proyectoaceros.Navigation.Navigation
 import io.devexpert.proyectoaceros.Navigation.defineMainScreen
 import io.devexpert.proyectoaceros.View.AsignacionTareas
 import io.devexpert.proyectoaceros.View.FirstMainScreen
+import io.devexpert.proyectoaceros.View.InicioApp
+import io.devexpert.proyectoaceros.View.Login
 import io.devexpert.proyectoaceros.View.MenuInicio
+import io.devexpert.proyectoaceros.View.ProcesoActividades
+import io.devexpert.proyectoaceros.View.Registro
 import io.devexpert.proyectoaceros.View.SeconMainScreen
 import io.devexpert.proyectoaceros.other.getBody.typographyTheme.AppTypographyInstance
 import androidx.compose.material3.MaterialTheme as M3MaterialTheme
@@ -43,4 +47,5 @@ class MainActivity : ComponentActivity() {
 @Preview (showSystemUi = true)
 @Composable
 fun AppAndroidPreview() {
+    //InicioApp()
 }

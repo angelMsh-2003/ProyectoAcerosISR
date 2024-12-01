@@ -1,5 +1,6 @@
 package io.devexpert.proyectoaceros.View
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -34,6 +35,12 @@ import androidx.compose.ui.unit.sp
 import io.devexpert.proyectoaceros.Navigation.AppScreen
 import io.devexpert.proyectoaceros.Navigation.Navigation
 import io.devexpert.proyectoaceros.other.Theme
+import org.jetbrains.compose.resources.DrawableResource
+import org.jetbrains.compose.resources.painterResource
+import proyectoacerosisr.composeapp.generated.resources.Res
+import proyectoacerosisr.composeapp.generated.resources.allDrawableResources
+import proyectoacerosisr.composeapp.generated.resources.compose_multiplatform
+import proyectoacerosisr.composeapp.generated.resources.note_menu
 
 @Composable
 fun MainMenuInicio (navController: Navigation) {
@@ -84,12 +91,17 @@ fun MenuInicio (navController: Navigation) {
                         .size(150.dp)
                         .border(3.dp, Theme.secondaryColor)
                 ) {
-                    Icon(
+                    Image(
+                        painterResource(Res.drawable.note_menu),
+                        null
+                    )
+                    /*Icon(
                         Icons.Rounded.AddCircle,
                         contentDescription = "Localized description",
                         tint = Theme.secondaryColor,
                         modifier = Modifier.fillMaxSize()
                     )
+                     */
                 }
 
             }
@@ -118,7 +130,7 @@ fun MenuInicio (navController: Navigation) {
                 Spacer(modifier = Modifier.width(8.dp))
                 IconButton(
                     onClick = {
-                        // Acción al hacer clic
+                        navController.navigateTo(AppScreen.ProcesoTareas)
                     },
                     modifier = Modifier
                         .size(150.dp)

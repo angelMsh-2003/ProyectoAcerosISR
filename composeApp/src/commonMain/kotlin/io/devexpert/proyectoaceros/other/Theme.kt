@@ -11,6 +11,7 @@ class Theme {
         val fourthColor : Color = Color (0xFF7D7D7D)
         val fifthColor : Color = Color (0xFF333333)
         val backgroundColor : Color = Color (0xFFF6FAFE)
+        val backgroundColorTwo : Color = Theme.primaryColor.copy(alpha = 0.1f)
         val textColorBlue : Color = Color (0xFF0F3B50)
         val textColorBlack : Color = Color (0xFF000000)
         val textColorWhite : Color = Color (0xFFFFFFFF)
