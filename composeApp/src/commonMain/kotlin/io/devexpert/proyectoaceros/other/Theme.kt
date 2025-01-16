@@ -12,8 +12,10 @@ class Theme {
         val fifthColor : Color = Color (0xFF333333)
         val backgroundColor : Color = Color (0xFFF6FAFE)
         val backgroundColorTwo : Color = Theme.primaryColor.copy(alpha = 0.1f)
+        val backgroundColorThree : Color = Theme.secondaryColor.copy(alpha = 0.1f)
         val textColorBlue : Color = Color (0xFF0F3B50)
         val textColorBlack : Color = Color (0xFF000000)
         val textColorWhite : Color = Color (0xFFFFFFFF)
+        var iconColorSecundary: Color = Color (0xFFA8D6C8)
     }
 }

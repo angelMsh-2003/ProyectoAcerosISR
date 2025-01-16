@@ -1,1 +1,280 @@
+CREATE TABLE CurrentUser (
+    ID INTEGER PRIMARY KEY,
+    UserId INTEGER NOT NULL,
+    NombreEmpleado TEXT NOT NULL CHECK(length(NombreEmpleado) <= 50),
+    Cargo TEXT NOT NULL CHECK(length(Cargo) <= 15)
+    -- loginTime TIMESTAMP DEFAULT CURRENT_TIMESTAMP -- Registro del momento de inicio de sesión
+);
+---------------TABLAS RELACIONADAS---------------
+CREATE TABLE Actividades (
+	ActividadId INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+	Descripcion TEXT NOT NULL CHECK(length(Descripcion) <= 50),
+	MargenError INTEGER NOT NULL CHECK(length(MargenError) <= 2),
+	Area TEXT NOT NULL CHECK(length(Area) <= 20)
+);
 
+CREATE TABLE Empleados (
+    NumEmpleado INTEGER NOT NULL CHECK(NumEmpleado >= 0 AND NumEmpleado <= 9999999) PRIMARY KEY ,
+ 	NombreEmpleado TEXT NOT NULL CHECK(length(NombreEmpleado) <= 50),
+	Cargo TEXT NOT NULL CHECK(length(Cargo) <= 15),
+	Correo TEXT CHECK(length(Correo) <= 30),
+	Password_hash TEXT,
+    Salt TEXT,
+	Estado INTEGER CHECK(Estado BETWEEN 0 AND 1)
+);
+
+CREATE TABLE Tareas (
+	ActividadId INTEGER NOT NULL,
+	NumEmpleado INTEGER NOT NULL,
+	Estado TEXT NOT NULL CHECK(length(Estado) <= 11),
+	FechaInicio TEXT NOT NULL CHECK(length(FechaInicio) <= 10),
+	FechaFin TEXT NOT NULL CHECK(length(FechaFin) <= 10),
+	PRIMARY KEY (ActividadId,NumEmpleado),
+	FOREIGN KEY (ActividadId) REFERENCES Actividades(ActividadId),
+	FOREIGN KEY (NumEmpleado) REFERENCES Empleados(NumEmpleado)
+);
+
+---------------TABLAS NO RELACIONADAS---------------
+
+CREATE TABLE Laminas (
+	LaminasID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+	TipoMaterial TEXT NOT NULL CHECK(length(TipoMaterial) <= 20),
+	Calibre INTEGER NOT NULL CHECK(length(Calibre) <= 4),
+	Acabado TEXT NOT NULL CHECK(length(Acabado) <= 20),
+	Cantidad INTEGER NOT NULL CHECK(length(Cantidad) <= 5),
+	Medida TEXT NOT NULL CHECK(length(Medida) <= 30),
+	Proveedor TEXT NOT NULL CHECK(length(Proveedor) <= 35)
+ );
+
+CREATE TABLE Herramienta (
+	HerramientaID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+	NombreHerramienta TEXT NOT NULL CHECK(length(NombreHerramienta) <= 30),
+	Cantidad INTEGER NOT NULL CHECK(length(Cantidad) <= 4),
+	Ubicacion TEXT NOT NULL CHECK(length(Ubicacion) <= 20)
+);
+
+CREATE TABLE Soldadura (
+	SoldaduraID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+	NombreSoldadura TEXT NOT NULL CHECK(length(NombreSoldadura) <= 15),
+	Tipo TEXT NOT NULL CHECK(length(Tipo) <= 20),
+	Cantidad INTEGER NOT NULL CHECK(length(Cantidad) <= 5),
+	Proveedor TEXT NOT NULL CHECK(length(Proveedor) <= 35)
+);
+
+CREATE TABLE Tubos (
+	TubosID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+	Material TEXT NOT NULL CHECK(length(Material) <= 15),
+	Calibre INTEGER NOT NULL CHECK(length(Calibre) <= 4),
+	Tipo TEXT NOT NULL CHECK(length(Tipo) <= 20),
+	Forma TEXT NOT NULL CHECK(length(Forma) <= 20),
+	Cantidad INTEGER NOT NULL CHECK(length(Cantidad) <= 5),
+	Acabado TEXT NOT NULL CHECK(length(Acabado) <= 30),
+	Medida TEXT NOT NULL CHECK(length(Medida) <= 30),
+	Proveedor TEXT NOT NULL CHECK(length(Proveedor) <= 35)
+);
+-------------------------------CRUD TABLAS RELACIONALES-------------------------------
+
+------------------ActualUser----------------
+insertActualUser:
+INSERT INTO CurrentUser (ID, UserId, NombreEmpleado, Cargo)
+VALUES (?, ?, ?, ?);
+
+deleteActualUser:
+DELETE FROM CurrentUser;
+
+selectActualUser:
+SELECT UserId,NombreEmpleado, Cargo FROM CurrentUser
+WHERE ID = 1;
+
+readActualUserExisting:
+SELECT EXISTS (
+    SELECT 1
+    FROM CurrentUser
+    WHERE ID = ?
+);
+
+------------------EMPLEADO------------------
+insertNewUser:
+INSERT INTO Empleados (NumEmpleado, NombreEmpleado, Cargo)
+VALUES (?,?,?);
+
+updateUserExisting:
+UPDATE Empleados
+SET Correo = ?, Password_hash = ?, Salt = ?, Estado = ?
+WHERE NumEmpleado = ?;
+
+readNumUserExisting:
+SELECT NumEmpleado FROM Empleados
+WHERE NumEmpleado = ?;
+readNameUserExisting:
+SELECT NombreEmpleado FROM Empleados
+WHERE NumEmpleado = ?;
+readLevelUserExisting:
+SELECT Cargo FROM Empleados
+WHERE NumEmpleado = ?;
+readHashExisting:
+SELECT Password_hash FROM Empleados
+WHERE NumEmpleado = ?;
+readSaltExisting:
+SELECT Salt FROM Empleados
+WHERE NumEmpleado = ?;
+readMeilExisting:
+SELECT Correo FROM Empleados
+WHERE NumEmpleado = ?;
+
+
+readEspeficiUserExisting:
+SELECT EXISTS (
+    SELECT 1
+    FROM Empleados
+    WHERE NumEmpleado = ?
+);
+----------------Actividades // Tareas-----------------
+insertNewActivity:
+INSERT INTO Actividades (Descripcion, MargenError, Area)
+VALUES (?,?,?);
+
+validMaxIdActivity:
+SELECT COALESCE(MAX(ActividadId),0) FROM Actividades;
+
+insertNewTask:
+INSERT INTO Tareas (ActividadId,NumEmpleado, Estado, FechaInicio, FechaFin)
+VALUES (?,?,?,?,?);
+
+readTaskExisting:
+SELECT
+    Actividades.ActividadId,
+    Actividades.Descripcion,
+    Tareas.NumEmpleado,
+    Actividades.Area,
+    Tareas.Estado,
+    Actividades.MargenError,
+    Tareas.FechaInicio,
+    Tareas.FechaFin
+FROM Actividades
+INNER JOIN Tareas
+ON Actividades.ActividadId = Tareas.ActividadId;
+
+deleteTaskExisting:
+DELETE FROM Tareas
+WHERE ActividadId = ?;
+deleteActivityExisting:
+DELETE FROM Actividades
+WHERE ActividadId = ?;
+
+updateActivityExisting:
+UPDATE Actividades
+SET
+	Descripcion = ?,
+	MargenError = ?,
+	Area = ?
+WHERE ActividadId = ?;
+
+updateTaskExisting:
+UPDATE Tareas
+SET
+	NumEmpleado = ?,
+	Estado = ?,
+	FechaInicio = ?,
+	FechaFin = ?
+WHERE ActividadId = ?;
+-----------------------------CRUD TABLAS NO RELACIONALES-----------------------------
+----------------Laminas-----------------
+insertNewSheet:
+INSERT INTO Laminas (TipoMaterial, Calibre, Acabado, Cantidad, Medida, Proveedor)
+VALUES (?,?,?,?,?,?);
+
+readSheetExisting:
+SELECT * FROM Laminas;
+
+countSheetExisting:
+SELECT COUNT(*) AS Total FROM Laminas;
+
+deleteSheetExisting:
+DELETE FROM Laminas
+WHERE LaminasID = ?;
+
+updateSheetExisting:
+UPDATE Laminas
+SET
+	TipoMaterial = ?,
+	Calibre  = ?,
+	Acabado = ?,
+	Cantidad = ?,
+	Medida = ?,
+	Proveedor = ?
+WHERE LaminasID = ?;
+
+----------------Herramienta-----------------
+insertNewTool:
+INSERT INTO Herramienta (NombreHerramienta, Cantidad, Ubicacion)
+VALUES (?,?,?);
+
+readToolExisting:
+SELECT * FROM Herramienta;
+
+countToolsExisting:
+SELECT COUNT(*) AS Total FROM Herramienta;
+
+deleteToolExisting:
+DELETE FROM Herramienta
+WHERE HerramientaID = ?;
+
+updateToolExisting:
+UPDATE Herramienta
+SET
+	NombreHerramienta = ?,
+	Cantidad = ?,
+	Ubicacion = ?
+WHERE HerramientaID = ?;
+----------------Soldadura-----------------
+insertNewSol:
+INSERT INTO Soldadura (NombreSoldadura, Tipo, Cantidad, Proveedor)
+VALUES (?,?,?,?);
+
+readSolExisting:
+SELECT * FROM Soldadura;
+
+countSolExisting:
+SELECT COUNT(*) AS Total FROM Soldadura;
+
+deleteSolExisting:
+DELETE FROM Soldadura
+WHERE SoldaduraID = ?;
+
+updateSolExisting:
+UPDATE Soldadura
+SET
+	NombreSoldadura = ?,
+	Tipo = ?,
+	Cantidad = ?,
+	Proveedor= ?
+WHERE SoldaduraID = ?;
+
+----------------Tubos-----------------
+insertNewTubos:
+INSERT INTO Tubos (Material, Calibre, Tipo, Forma, Cantidad, Acabado, Medida, Proveedor)
+VALUES (?,?,?,?,?,?,?,?);
+
+readTubosExisting:
+SELECT * FROM Tubos;
+
+countTubosExisting:
+SELECT COUNT(*) AS Total FROM Tubos;
+
+deleteTubosExisting:
+DELETE FROM Tubos
+WHERE TubosID = ?;
+
+updateTubosExisting:
+UPDATE Tubos
+SET
+	Material = ?,
+	Calibre = ?,
+	Tipo = ?,
+	Forma = ?,
+	Cantidad = ?,
+	Acabado = ?,
+	Medida = ?,
+	Proveedor = ?
+WHERE TubosID = ?;
