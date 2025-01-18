@@ -12,30 +12,25 @@
 </div>
 
 
-## Comenzando 🚀
+## Documentación 🚀
 
-_Estas instrucciones te permitirán obtener una copia del proyecto en funcionamiento en tu máquina local para propósitos de desarrollo y pruebas._
+_Para el sistema se diseñó un manual para la instalación y comprensión del sistema._
 
-Mira **Deployment** para conocer como desplegar el proyecto.
-
+* [Manual de usuario](https://drive.google.com/file/d/19da2qGXWcMOycp_pj6NINk0KYQeZig-2/view?usp=sharing) - Manual para la instalación y uso.
 
 ### Pre-requisitos 📋
 
-_Que cosas necesitas para instalar el software y como instalarlas_
+_Para ejecutar el sistema en su versión mas actual se necesitan las siguientes condiciones:_
 
-```
-Da un ejemplo
-```
+- Tener un dispositivo móvil con sistema operativo Android. 
+- Contar con acceso a internet para descargar la app y sincronizar datos. 
+- Crear una cuenta o ser registrado previamente por el supervisor. 
+- Acceso al correo electrónico para recuperación de credenciales en caso de olvido.
 
-### Instalación 🔧
+### Apk 🔧
 
-_Una serie de ejemplos paso a paso que te dice lo que debes ejecutar para tener un entorno de desarrollo ejecutandose_
+_Para poder usar la aplicación puedes descargar un fichero ejecutable APK (A.apk)  para instalar directamente en tu dispositivo Android. Deberás permitir la instalación de aplicaciones fuera de la tienda._
 
-_Dí cómo será ese paso_
-
-```
-Da un ejemplo
-```
 
 _Y repite_
 
